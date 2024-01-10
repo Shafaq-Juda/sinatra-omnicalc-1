@@ -4,12 +4,8 @@ require "sinatra/reloader"
 get("/") do
   "
   <h1>Welcome to your Sinatra App!</h1>
-  <p>Define some routes in app.rb</p>
+  <p>Visit some routes like /square/new to begin</p>
   "
-end
-
-get("/howdy") do
-  erb(:hello)
 end
 
 get("/square/new")do
@@ -48,4 +44,15 @@ get("/payment/results")do
 @denominator = 1 - (1+@r) ** -@n
 @p = (@numerator/@denominator).to_fs(:currency)
 erb(:payment_results)
+end
+
+get("/random/new")do
+erb(:random)
+end
+
+get("/random/results")do
+@min = params.fetch("min").to_f
+@max = params.fetch("max").to_f
+@random = rand(@min..@max).to_f
+erb(:random_results)
 end
